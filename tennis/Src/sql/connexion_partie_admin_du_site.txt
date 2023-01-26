@@ -1,0 +1,4 @@
+Ajouter ?login dans l'URL pour accéder à la partie Back-office
+
+user : admin_tennis
+mdp : PzaB6fXfmtkq3Si

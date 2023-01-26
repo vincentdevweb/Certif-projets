@@ -1,0 +1,416 @@
+-- phpMyAdmin SQL Dump
+-- version 5.2.0
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1
+-- Généré le : mer. 12 oct. 2022 à 15:44
+-- Version du serveur : 10.4.24-MariaDB
+-- Version de PHP : 8.1.6
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
+
+--
+-- Base de données : `burger-quizz-vb`
+--
+
+DROP DATABASE if exists `burger-quizz-vb`;
+ 
+CREATE DATABASE `burger-quizz-vb` DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci;
+USE `burger-quizz-vb`;
+
+CREATE TABLE question (
+  id INT UNSIGNED NOT NULL auto_increment ,
+  libelle_q varchar(255) NOT NULL,
+  code_q varchar(255) NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE reponse (
+  id INT UNSIGNED NOT NULL auto_increment ,
+  libelle_rep varchar(255) NOT NULL,
+  id_question INT UNSIGNED NOT NULL,
+  code_r varchar(255) NOT NULL,
+  bonne_rep BOOLEAN DEFAULT '0', 
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE users (
+  id INT UNSIGNED NOT NULL auto_increment ,
+  pseudo varchar(64) NOT NULL,
+  mdp varchar(64) NOT NULL, 
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+CREATE TABLE score (
+  id INT UNSIGNED NOT NULL auto_increment ,
+  date_session INT UNSIGNED NOT NULL,
+  id_user INT UNSIGNED NOT NULL,
+  bonne_rep_user INT UNSIGNED NOT NULL,
+  PRIMARY KEY (id)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+ALTER TABLE question
+  ADD UNIQUE KEY question_UNIQUE (code_q);
+  
+ALTER TABLE reponse
+  ADD UNIQUE KEY reponse_UNIQUE (code_r),
+  ADD CONSTRAINT fk_list_question_id FOREIGN KEY (id_question) REFERENCES question (id) ON DELETE CASCADE ON UPDATE CASCADE;
+
+ALTER TABLE users
+  ADD UNIQUE KEY pseudo_UNIQUE (pseudo);
+
+ALTER TABLE score
+  ADD UNIQUE KEY date_session_UNIQUE (date_session),
+  ADD CONSTRAINT fk_id_user_users_id FOREIGN KEY (id_user) REFERENCES users (id) ON DELETE CASCADE ON UPDATE CASCADE;
+ 
+DROP USER if exists 'Baggel'@'%';
+
+CREATE USER 'Baggel'@'%' IDENTIFIED BY 'Baggel1234';
+
+GRANT SELECT, INSERT, UPDATE, DELETE ON `burger-quizz-vb`.* TO 'Baggel'@'%'; 
+
+
+--
+-- Déchargement des données de la table `question`
+--
+
+
+INSERT INTO `question` (`id`, `libelle_q`, `code_q`) VALUES
+(1, 'Qui a dit que 1+1 pouvait faire \"même peut-être 11\" ?', 'Q1'),
+(2, 'En combien d\'heures les protagonistes du \'Tour de monde\' en 80 jours de Jules Verne font-ils le tour du monde ?', 'Q2'),
+(3, 'Dans \"les Simpson\", le gérant du bar s\'appelle :', 'Q3'),
+(4, 'Qui n\'a jamais combattu Dracula au cinéma ?', 'Q4'),
+(5, 'Laquelle de ces peintures n\'existe pas ?', 'Q5'),
+(6, 'Que veulent dire les chiffres au fond des verres de cantine ?', 'Q6'),
+(7, 'Qu\'est-ce qui est surpenant quand David Banner se transforme en Hulk ?', 'Q7'),
+(8, 'Jean-Claude Vandamme a déclaré dans Première : \"Je suis fasciné par l\'air. Si vous enlever l\'air du ciel...\"', 'Q8'),
+(9, 'En plongée, qui signifie le geste pouce et index joints faisant un cercle ?', 'Q9'),
+(10, 'Qu\'est-ce que la kénophobie ?', 'Q10'),
+(11, 'Quel gang n\'a jamais existé au cinéma ?', 'Q11'),
+(12, 'Un anglais a reçu un avertissement de la SPA anglaise parce qu\'il :', 'Q12'),
+(13, 'Quel est le point commun ente Janis Joplin, Jimi Hendrix et Jim Morisson ? ', 'Q13'),
+(14, 'Quelle est la durée de vie d\'un termite ?', 'Q14'),
+(15, 'Une seule de ces chansons de Fancky Vincent n\'est pas dans l\'album Franky Vincent ?', 'Q15'),
+(16, 'A quoi s\'intéresse-t-on quand on fait de la potamologie ?', 'Q16'),
+(17, 'Que signifie le nom du groupe corse \'I Muvrini\' ?', 'Q17'),
+(18, 'Laquelle de ces montagnes existe ?', 'Q18'),
+(19, 'Qu\'est-ce qu\'une ploutocratie ?', 'Q19'),
+(20, 'En l\'an 2000, combien de personnes ont été tuées par des requins ?', 'Q20'),
+(21, 'Comment est mort l\'inventeur du parachute ?', 'Q21'),
+(22, 'Yamakasi veut dire :', 'Q22'),
+(23, 'Quel est le nom de la petite Sirène de Disney ?', 'Q23'),
+(24, 'Pourquoi les autruches enfouissent-elles leut tête dans le sol ?', 'Q24'),
+(25, 'Que font parfois les femelles anacondas après l\'accouplement', 'Q25'),
+(26, 'Quelle autre carrière aurait dû avoir Julio Iglesias', 'Q26'),
+(27, 'A Churchill, petite ville au nord du Canada, les habitants laissent leurs portes de voitures et de maisons ouvertes. Pourquoi ?', 'Q27'),
+(28, 'Le tournage de \"La Passion du Christ\" fut des plus éprouvants pour Jim Caviezel qui y incarne Jésus. Que lui est-il arrivé ?', 'Q28'),
+(29, 'Une seule de ces 4 épreuves de jeu TV n\'existe pas', 'Q29'),
+(30, 'Dans \"Le Seigneur des Anneaux\", comment a été réalisé le rugissement du Balrog ?', 'Q30'),
+(31, 'Les paroles de l\'hymne de la Ligue des Champions(de football) sont un mix de plusieurs langues. Sont-ce ?', 'Q31'),
+(32, 'Quelle est la particularité du stade de foot \"Zérao\" au Brésil ?', 'Q32'),
+(33, 'Parmis ces 4 Ronaldo, lequel a déjà inscrit plus de 100 buts en Champions League ?', 'Q33'),
+(34, 'Laquelle de ces anecdotes est vraie ?', 'Q34'),
+(35, 'De qui est inspiré le personnage du film d\'animation Shrek ?', 'Q35'),
+(36, 'Laquelle de ces infos complètement hallucinantes est vraie ?', 'Q36'),
+(37, 'Qui est Gilles de Rais ?', 'Q37'),
+(38, 'Dans la liste suivante qu\'est-ce qui n\'était pas autorisé à l\'école en France dans les années 50?', 'Q38'),
+(39, 'Laquelle de ces lois est fausse ?', 'Q39'),
+(40, 'Une seule de ces journées existe, laquelle ?', 'Q40'),
+(41, 'Qui est Christman Genipperteinga ?', 'Q41'),
+(42, 'Laquelle de ces affirmations est vraie ?', 'Q42'),
+(43, 'Quelle est la franchise médiatique la plus lucrative du monde au 1er janvier 2018 ?', 'Q43'),
+(44, 'Laquelle de ces infos top secrètes est vraie ?', 'Q44'),
+(45, 'Lequel de ces musées n\'existe pas ?', 'Q45'),
+(46, 'Laquelle de ces écoles n\'existe pas ?', 'Q46'),
+(47, 'Lesquelles de ces personnalités ont failli être de la même famille ?', 'Q47'),
+(48, 'Maurice Garin est célèbre pour avoir...?', 'Q48'),
+(49, 'Que font la plupart des Japonais le jour de Noël ?', 'Q49'),
+(50, 'Quel acteur incarne le héros du film de Christopher Nolan \"Interstellar\" ?', 'Q50'),
+(51, 'Laquelle de ces communes française existe ?', 'Q51'),
+(52, 'Quelle chanson des Beatles avec \"Love\" dans le titre n\'existe pas ?', 'Q52'),
+(53, 'Au lycée, George W. Bush était...', 'Q53'),
+(54, 'Quelle information sur Tom Cruise est véridique ? Il a failli...', 'Q54'),
+(55, 'En Russie, qu\'utilisent certaines entreprises pour recruter ?', 'Q55'),
+(56, 'Quel pays est le plus gros consommateur de vin par habitant?', 'Q56'),
+(57, 'Parmi ces 4 interdictions étranges, laquelle n\'existe pas ?', 'Q57'),
+(58, 'En Chine, lequel de ces droits au travail est inscrit dans la constitution ?', 'Q58'),
+(59, 'Laquelle de ces infos est vraie ?', 'Q59'),
+(60, 'Quelle est la particularité de Rafael Nadal ?', 'Q60'),
+(61, 'Le Pygargue à tête blanche est l\'emblème des Etats-Unis. Mais Benjamin Franklin aurait préféré...', 'Q61'),
+(62, 'En 1899, Félix Faure est décédé d\'une congestion cérébrale suite à une gâterie de sa maîtresse Marguerite Steinheil. Comment cette dernière fut-elle surnommée ?', 'Q62'),
+(63, 'Quel truc pas hyper cool Jerry Lee Lewis a-t-il fait ?', 'Q63'),
+(64, 'Quel est le point commun entre l\'Homme et l\'aigle royal ?', 'Q64');
+
+--
+-- Déchargement des données de la table `reponse`
+--
+
+INSERT INTO `reponse` (`id`, `libelle_rep`, `id_question`, `code_r`, `bonne_rep`) VALUES
+(1, 'Jean-Claude Vandamme ?', 1, 'R1', 1),
+(2, 'Javascript ? (c\'est aussi une bonne réponse, mais c\'est pas gentil)', 1, 'R2', 0),
+(3, 'Obi-Wan Kenobi', 1, 'R3', 0),
+(4, '1500 heures', 2, 'R4', 0),
+(5, '1800 heures', 2, 'R5', 1),
+(6, '2437 heures', 2, 'R6', 0),
+(7, '1 million d\'heures', 2, 'R7', 0),
+(8, 'Moe', 3, 'R8', 1),
+(9, 'Joe', 3, 'R9', 0),
+(10, 'Gourio', 3, 'R10', 0),
+(11, 'Sue Ellen', 3, 'R11', 0),
+(12, 'Les Charlots contre Dracula', 4, 'R12', 0),
+(13, 'Dracula conte Frankenstein', 4, 'R13', 0),
+(14, 'Billy le Kid conte Dracula', 4, 'R14', 0),
+(15, 'Dracula conte Godzilla', 4, 'R15', 1),
+(16, 'La peinture à l\'oeuf', 5, 'R16', 0),
+(17, 'La peinture à la cire', 5, 'R17', 0),
+(18, 'La peinture à la harissa', 5, 'R18', 1),
+(19, 'La peinture au couteau', 5, 'R19', 0),
+(20, 'C\'est l\'âge que vous avez et le plus jeune va chercher l\'eau', 6, 'R20', 0),
+(21, 'C\'est la note que vous aurez à l\'interro de cet après-midi', 6, 'R21', 0),
+(22, 'C\'est le nombre de filles avec qui vous sortirez dans la vie', 6, 'R22', 0),
+(23, 'On sait pas, ça reste un mystère mais on est tous sur le coup…', 6, 'R23', 1),
+(24, 'Il ressemble au géant vert', 7, 'R24', 0),
+(25, 'Il ne pense pas à faire du yoga', 7, 'R25', 0),
+(26, 'Il déchire tous ses vêtements, sauf son short et son caleçon. C\'est fou, il a une toute petite bite finalement ! ', 7, 'R26', 1),
+(27, 'Il change de nom alors qu\'il ne sait pas parler', 7, 'R27', 0),
+(28, 'Il n\'y aura plus d\'air', 8, 'R28', 0),
+(29, 'On sera dead et plus alive', 8, 'R29', 0),
+(30, 'Tous les oiseaux tomberaient par terre', 8, 'R30', 1),
+(31, 'Il faudrait aller vivre sous l\'eau', 8, 'R31', 0),
+(32, 'Je lui ai mis la rondelle comme ça', 9, 'R32', 0),
+(33, 'Ta blague, elle vaut zéro', 9, 'R33', 0),
+(34, 'Je vais bien, tout va bien', 9, 'R34', 1),
+(35, 'Vas-y, vise là dedans avec ton harpon', 9, 'R35', 0),
+(36, 'La peut de jouer au Kéno', 10, 'R36', 0),
+(37, 'La peur des fromages', 10, 'R37', 0),
+(38, 'La peur de Ken le survivant', 10, 'R38', 0),
+(39, 'La peur de la nuit ?', 10, 'R39', 1),
+(40, 'Le gang des chaussons aux pommes', 11, 'R40', 0),
+(41, 'La gang des chanteurs à moustache', 11, 'R41', 1),
+(42, 'Le gang des pianos à bretelle', 11, 'R42', 0),
+(43, 'Le gang du dimanche', 11, 'R43', 0),
+(44, 'Appelait toutes ses vaches avec des noms de la famille royale', 12, 'R44', 0),
+(45, 'Lançait des vaches mortes avec une catapulte', 12, 'R45', 1),
+(46, 'Tuait des vaches à main nues', 12, 'R46', 0),
+(47, 'Avait offert un piercing à sa vache', 12, 'R47', 0),
+(48, 'La drogue', 13, 'R48', 0),
+(49, 'Le J de leur prénom', 13, 'R49', 0),
+(50, 'Ils sont tous morts au même âge, 27 ans', 13, 'R50', 0),
+(51, 'a,b, c et donc d', 13, 'R259', 1),
+(52, '13 jours', 14, 'R51', 0),
+(53, 'deux siècles', 14, 'R52', 0),
+(54, '60 ans', 14, 'R53', 1),
+(55, 'Comme Christophe Lambert, le termite est immortel', 14, 'R54', 0),
+(56, 'Réchauffe l\'hier', 15, 'R55', 0),
+(57, 'Donne-moi ta friandise', 15, 'R56', 0),
+(58, 'Suce ma banane', 15, 'R57', 1),
+(59, 'T\'es chiant(e)', 15, 'R58', 0),
+(60, 'Aux hippopotames', 16, 'R59', 0),
+(61, 'Aux potagers', 16, 'R60', 0),
+(62, 'Aux fleuves', 16, 'R61', 1),
+(63, 'Aux potins', 16, 'R62', 0),
+(64, 'Les moutons', 17, 'R63', 0),
+(65, 'Les mouflons', 17, 'R64', 1),
+(66, 'Les chanteurs', 17, 'R65', 0),
+(67, 'Putain moins fort y\'en a marre', 17, 'R66', 0),
+(68, 'Le mont Frolic', 18, 'R67', 0),
+(69, 'Le mont Canigou', 18, 'R68', 1),
+(70, 'Le mont Royal Canin', 18, 'R69', 0),
+(71, 'Le mont Pal', 18, 'R70', 0),
+(72, 'Un régime politique où le pouvoir appartient aux', 19, 'R71', 1),
+(73, 'Un régime politique merveilleux ou le pouvoir appartient à Pluto et à tous ces amis', 19, 'R72', 0),
+(74, 'Un régime politique où le pouvoir appartient aux plus forts', 19, 'R73', 0),
+(75, 'Un régime amaincissant à base de ploutes', 19, 'R74', 0),
+(76, '10 personnes, et c\'est la bonne réponse', 20, 'R75', 1),
+(77, '100 personnes', 20, 'R76', 0),
+(78, '2000 personnes', 20, 'R77', 0),
+(79, 'Ca dépend combien de fois t\'as vu les dents de la mer', 20, 'R78', 0),
+(80, 'Dans son lit comme tout le monde', 21, 'R79', 0),
+(81, 'Dans le lit de sa femme, comme tout le monde', 21, 'R80', 0),
+(82, 'Dans un accident d\'avion', 21, 'R81', 0),
+(83, 'En sautant de la Tour Eiffel, le con', 21, 'R82', 1),
+(84, '\"Homme araignée\" en japonais', 22, 'R83', 0),
+(85, '\"Homme fort\" en zaïrois', 22, 'R84', 1),
+(86, 'Yamakaso, au pluriel', 22, 'R85', 0),
+(87, 'Homme moitié Yamaha, moitié Kawasaki', 22, 'R86', 0),
+(88, 'Skip', 23, 'R87', 0),
+(89, 'Ariel', 23, 'R88', 1),
+(90, 'Omo Micro', 23, 'R89', 0),
+(91, 'Dash 3 en 1', 23, 'R90', 0),
+(92, 'Pour se cacher', 24, 'R91', 0),
+(93, 'Pour protéger leurs oeufs', 24, 'R92', 1),
+(94, 'Pour avoir moins chaud', 24, 'R93', 0),
+(95, 'Pour déconner', 24, 'R94', 0),
+(96, 'Elles mangent une concurrente, les gourmandes', 25, 'R95', 0),
+(97, 'Elles mangent leurs partenaires, les gourmandes', 25, 'R96', 1),
+(98, 'Elles dorment jusqu\'à l\'accouchement, ça fatigue', 25, 'R97', 0),
+(99, 'Elles s\'allument une clope, comme tout le monde', 25, 'R98', 0),
+(100, 'Footballeur, il était au centre de formation de \"Real Madrid\"', 26, 'R99', 1),
+(101, 'Plombier, il était titulaire de l\'équivalent d\'un CAP', 26, 'R100', 0),
+(102, 'Alpiniste, il était très bon grimpeur paraît-il', 26, 'R101', 0),
+(103, 'Archevêque, avec un nom pareil, c\'était presque une évidence', 26, 'R102', 0),
+(104, 'Car c\'est le meilleur moyen pour que personne ne vole', 27, 'R103', 0),
+(105, 'Au contraire, c\'est pour se faire voler et faire marcher l\'assurance ', 27, 'R104', 0),
+(106, 'Pour que nimporte qui pense se planquer en cas de rencontre avec un ours', 27, 'R105', 1),
+(107, 'Pour que les ours puissent se planquer s\'ils croisent Garou', 27, 'R106', 0),
+(108, 'Il s\'est déboité l\'épaule', 28, 'R107', 0),
+(109, 'Il a fait de l\'hypothermie', 28, 'R108', 0),
+(110, 'Il a été frappé par la foudre', 28, 'R109', 0),
+(111, 'A, B, C et donc D', 28, 'R110', 1),
+(112, '\"Grosse ou Enceinte ?\" : les candidats doivent deviner si une jeune femme attend un enfant ou si elle est en surpoids', 29, 'R111', 0),
+(113, '\"Hipster ou SDF ?\" : Même principe', 29, 'R112', 1),
+(114, '\"Naturelle ou Retouché ?\" : Même principe', 29, 'R113', 0),
+(115, '\"Chinois ou Japonais ?\" : Même principe', 29, 'R114', 0),
+(116, 'Ils ont traîné un parpaing sur un plancher en bois', 30, 'R115', 1),
+(117, 'ils ont ralenti le son d\'une locomotive à vapeur', 30, 'R116', 0),
+(118, 'Ils ont réutilisé le souffle de Dark Vador mais à l\'envers', 30, 'R117', 0),
+(119, 'Ils ont enregistré Gérard Darmon au réveil', 30, 'R118', 0),
+(120, 'L\'Espagnol, l\'Allemand et l\'Anglais', 31, 'R119', 0),
+(121, 'Le Français, l\'Anglais et l\'Allemand', 31, 'R120', 1),
+(122, 'L\'Anglais, l\'Italien et l\'Allemand', 31, 'R121', 0),
+(123, 'On s\'en fout, nous ce qu\'on veut, c\'est voir le match', 31, 'R122', 0),
+(124, 'Il n\'a accueilli aucun match depuis son inauguration en 1986', 32, 'R123', 0),
+(125, 'La ligne du milieu de terrain est alignée avec l\'Equateur', 32, 'R124', 1),
+(126, 'Son gazon naturel a laissé place à une végétation florissante', 32, 'R125', 0),
+(127, 'L\'équipe domiciliée a perdu tous ses matchs \"3-Zérao\"', 32, 'R126', 0),
+(128, 'Ronaldo des Santos Aveiro', 33, 'R127', 1),
+(129, 'Ronaldo Luis Nazario de Lima', 33, 'R128', 0),
+(130, 'Ronaldo de Assis Moreira', 33, 'R129', 0),
+(131, 'Ronaldo McDonaldo', 33, 'R130', 0),
+(132, 'Floyd Mayweather a une passion pour les coquillages', 34, 'R131', 0),
+(133, 'Mike Tyson est passionné par les pigeons', 34, 'R132', 1),
+(134, 'Jérôme Le Banner est un fou de géraniums', 34, 'R133', 0),
+(135, 'Louane est passionnée par les low-kicks', 34, 'R134', 0),
+(136, 'Dimitrove Alibovitch, un acrobate russe', 35, 'R135', 0),
+(137, 'Dany Diggel, un boxeur américain', 35, 'R136', 0),
+(138, 'Maurice Tillet, un catcheur français', 35, 'R137', 1),
+(139, 'Eva Green', 35, 'R138', 0),
+(140, 'Gustave Flaubert s\'est fait renvoyer de 4 lycées différents', 36, 'R139', 0),
+(141, 'Guillaume Apollinaire a un bac pro chauffagiste', 36, 'R140', 0),
+(142, 'Emile Zola a loupé son bac deux fois et a abandonné', 36, 'R141', 1),
+(143, 'Au collège, Mozart était nul à la flûte à bec', 36, 'R142', 0),
+(144, 'Un compagnon d\'arme de Jeanne D\'Arc', 37, 'R147', 1),
+(145, 'Le pire ennemi de Henri IV', 37, 'R148', 0),
+(146, 'Le cousin de Faudel', 37, 'R149', 0),
+(147, 'Le frère d\'Odile', 37, 'R150', 0),
+(148, 'Ecrire au stylo bille', 38, 'R151', 1),
+(149, 'Arrêter les cours à 14 ans', 38, 'R152', 0),
+(150, 'Frapper les enfants', 38, 'R153', 0),
+(151, 'Boire de l\'alcool', 38, 'R154', 0),
+(152, 'En France, il est interdit d\'appeler un cochon Napoléon', 39, 'R155', 0),
+(153, 'Dans le Minnesota, il est interdit d\'exciter les putois', 39, 'R156', 0),
+(154, 'A Singapour, il est interdit de peindre sa maison en rose', 39, 'R157', 1),
+(155, 'Dans le Vermont, il est interdit de siffler sous l\'eau', 39, 'R158', 0),
+(156, 'Journée Internationale du Ninja', 40, 'R159', 1),
+(157, 'Journée Européenne du Cow-Boy', 40, 'R160', 0),
+(158, 'Journée Mondiale du GI-JOE', 40, 'R161', 0),
+(159, 'Journée Internationale des journées mondiales', 40, 'R162', 0),
+(160, 'Le plus grand tueur en série de l\'Histoire', 41, 'R163', 1),
+(161, 'Le plus grand voyageur de l\'Histoire', 41, 'R164', 0),
+(162, 'Le plus grand séducteur de l\'Histoire', 41, 'R165', 0),
+(163, 'Le plus grand producteur de moules à l\'escabèche de \'Histoire', 41, 'R166', 0),
+(164, 'Nadal a un bras plus long que l\'autre', 42, 'R167', 0),
+(165, 'Teddy Riner a une main plus grosse que l\'autre', 42, 'R168', 0),
+(166, 'Usain Bolt a une jambe plus longue que l\'autre', 42, 'R169', 1),
+(167, 'Rocco a une jambe plus longue que les deux autres', 42, 'R170', 0),
+(168, 'Pokémon', 43, 'R171', 1),
+(169, 'Star Wars', 43, 'R172', 0),
+(170, 'Harry Potter', 43, 'R173', 0),
+(171, 'Diane, Femme Flic', 43, 'R174', 0),
+(172, 'Tom Hardy a collaboré avec la CIA', 44, 'R175', 0),
+(173, 'Russell Crowe a été protégé par le FBI', 44, 'R176', 1),
+(174, 'Robert De Niro a été surveillé par le KGB', 44, 'R177', 0),
+(175, 'Patrick Timsit a été dépanné par l\'EDF', 44, 'R178', 0),
+(176, 'Le musée de la Lessive', 45, 'R179', 0),
+(177, 'Le musée du Barbecue', 45, 'R180', 1),
+(178, 'Le musée du Corbillard', 45, 'R181', 0),
+(179, 'Le musée de la Tondeuse à Gazon', 45, 'R182', 0),
+(180, 'Une école de Sorcellerie', 46, 'R183', 0),
+(181, 'Une école de Ninja', 46, 'R184', 0),
+(182, 'Une école de dresseur de Pokémon', 46, 'R185', 1),
+(183, 'Une école de Jedi', 46, 'R186', 0),
+(184, 'AL Pacino et Salvatore Adamo', 47, 'R187', 0),
+(185, 'Steven Spielberg et Frédéric François', 47, 'R188', 0),
+(186, 'Clint Eastwood et Frank Michael', 47, 'R189', 0),
+(187, 'George Lucas et Dick Rivers', 47, 'R190', 1),
+(188, 'Gagné le prix Goncourt sans avoir écrit de bouquin', 48, 'R191', 0),
+(189, 'Gagné le Tour de France en prenant le train', 48, 'R192', 1),
+(190, 'Gagné Roland Garros alors qu\'il était manchot', 48, 'R193', 0),
+(191, 'Gagné un concours de sosie de Maurice Garin', 48, 'R194', 0),
+(192, 'Ils vont au centre commercial entre amis', 49, 'R195', 0),
+(193, 'Ils vont à l\'église en famille', 49, 'R196', 0),
+(194, 'Ils vont chez KFC en amoureux', 49, 'R197', 1),
+(195, 'Ils vont au motel entre amants', 49, 'R198', 0),
+(196, 'Leonardo DiCaprio', 50, 'R199', 0),
+(197, 'Matthew McConaughey', 50, 'R200', 1),
+(198, 'Christian Bale', 50, 'R201', 0),
+(199, 'Sarah Michelle Stellar', 50, 'R202', 0),
+(200, 'Mouais', 51, 'R203', 1),
+(201, 'Boff', 51, 'R204', 0),
+(202, 'Patope', 51, 'R205', 0),
+(203, 'Peutmieuxfaire', 51, 'R206', 0),
+(204, 'She Loves You', 52, 'R207', 0),
+(205, 'And I Love Her', 52, 'R208', 0),
+(206, 'I Love Everybody', 52, 'R209', 1),
+(207, 'P.S. I Love You', 52, 'R210', 0),
+(208, 'Champion du club d\'échec', 53, 'R211', 0),
+(209, 'Soliste à la chorale universitaire', 53, 'R212', 0),
+(210, 'Capitaine de l\'équipe de baseball', 53, 'R213', 0),
+(211, 'Capitaine des Cheerleaders', 53, 'R214', 1),
+(212, 'Se faire immoler sur le tournage de \"Mission Impossible\"', 54, 'R215', 0),
+(213, 'Exploser en vol sur le tournage de \"Top Gun\"', 54, 'R216', 0),
+(214, 'Se faire décapiter sur le tournage du \"Dernier Samouraï\"', 54, 'R217', 1),
+(215, 'Rentrer dans une secte, mais finalement je crois que c\'est bon', 54, 'R218', 0),
+(216, 'Des détecteurs de mensonges', 55, 'R219', 0),
+(217, 'Des robots, qui appellent les candidats et leur font passer un entretien', 55, 'R220', 1),
+(218, 'De la vodka, pour découvrir le vrai visage des candidats', 55, 'R221', 0),
+(219, 'Pas A, pas B, pas C, donc D', 55, 'R222', 0),
+(220, 'La  France', 56, 'R223', 0),
+(221, 'L\'Australie', 56, 'R224', 0),
+(222, 'Les Etats-Unis', 56, 'R225', 0),
+(223, 'Le Vatican', 56, 'R226', 1),
+(224, 'Mâcher des chewing-gums à Singapour', 57, 'R227', 0),
+(225, 'Se moucher après 8H du matin en Arabie Saoudite', 57, 'R228', 1),
+(226, 'Faire des châteaux de sable sur la plage à Eraclea en Italie', 57, 'R229', 0),
+(227, 'Lâcher un pet en public au Malawi', 57, 'R230', 0),
+(228, 'Le droit de faire grève', 58, 'R231', 0),
+(229, 'Le droit de faire la sieste', 58, 'R232', 1),
+(230, 'Le droit de porter des cols Mao', 58, 'R233', 0),
+(231, 'Le droit de fermer sa gueule et de fabriquer des tablettes tactiles', 58, 'R234', 0),
+(232, 'Brad Pitt s\'est blessé au talon d\'Achille sur le tournage de \"Troie\"', 59, 'R235', 1),
+(233, 'Sigourney Weaver a eu un ver solitaire pendant le tournage d\'\"Alien\"', 59, 'R236', 0),
+(234, 'Tobey Maguire a été mordu par une araignée sur le tournage de \"Spider-Man\"', 59, 'R237', 0),
+(235, 'Meryl Streep a rouillé sur le tournage de \"La Dame de Fer\"', 59, 'R238', 0),
+(236, 'Il joue au tennis de la main gauche alors qu\'il est droitier', 60, 'R239', 1),
+(237, 'Il joue au tennis de la main droite alors alors qu\'il est gaucher', 60, 'R240', 0),
+(238, 'Il joue aussi bien au tennis de la main droite que de la main gauche', 60, 'R241', 0),
+(239, 'Il possède deux mains droites ce qui est pratique parfois mais pas tout le temps', 60, 'R242', 0),
+(240, 'Un tigre du Bengale', 61, 'R243', 0),
+(241, 'Une panthère noire', 61, 'R244', 0),
+(242, 'Un lion d\'Amérique', 61, 'R245', 0),
+(243, 'Un dindon sauvage', 61, 'R246', 1),
+(244, 'La casseuse de pipe', 62, 'R247', 0),
+(245, 'Maggy les bons tuyaux', 62, 'R248', 0),
+(246, 'La grande souffleuse', 62, 'R249', 0),
+(247, 'La pompe funèbre', 62, 'R250', 1),
+(248, 'Il a géré pendant 3 ans un réseau de prostitution', 63, 'R251', 0),
+(249, 'Il a rendu ses enfants accros à la drogue', 63, 'R252', 0),
+(250, 'Il s\'est marié avec sa cousine qui n\'avait que 13 ans', 63, 'R253', 1),
+(251, 'Il a massacré les dauphins du Marineland d\'Antibes au harpon en chantant \"Great Balls of Fire\"', 63, 'R254', 0),
+(252, 'Ils ont tous les deux intégré le concept de la fidélité', 64, 'R255', 1),
+(253, 'Ils ont tous les deux intégré le concept du travail', 64, 'R256', 0),
+(254, 'Ils ont tous les deux intégré le concept du racisme', 64, 'R257', 0),
+(255, 'Ils ont tous les deux intégré la règle du hors-jeu', 64, 'R258', 0);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;

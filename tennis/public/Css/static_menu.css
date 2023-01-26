@@ -1,0 +1,20 @@
+.mt-cust1 {
+	margin-top: 7.2rem !important;
+}
+
+.color-cust1 {
+	background-color: #8A2BE2 !important;
+}
+
+@media (max-width:992px) {
+	.mt-cust1 {
+		margin-top: 5.7rem !important;
+	}
+}
+
+@media screen and (min-width:992px) {
+	.nav-item {
+		line-height: 80px;
+	}
+}
+

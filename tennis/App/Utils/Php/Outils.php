@@ -1,0 +1,45 @@
+<?php
+
+class Outils {
+
+    //Genère une suite un STR aléatoire
+    static public function genererSTRAleatoire() {
+        $caracteres = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
+        return $caracteres[rand(0, strlen($caracteres) - 1)];
+    }
+    /* Nettoie les données postées avant stockage */
+    static public function cleanUpValues($allValues) {
+        foreach ($allValues as $key => $value) {
+            if (is_array($value)) {
+                $allValues[$key] = self::cleanUpValues($value);
+            } else {
+                $allValues[$key] = addslashes(htmlspecialchars(trim(strip_tags($value))));
+            }
+        }
+        return $allValues;
+    }
+
+    /* Fonction qui s'assure qu'un appel de page PHP est bien effectué en AJAX */
+    static public function ajaxCheck(): bool
+    {
+        $check=false;
+        $requestedWith = $_SERVER['HTTP_X_REQUESTED_WITH'];
+
+        if(!empty($requestedWith) && strtolower($requestedWith) == 'xmlhttprequest') {
+            $check = true;
+        }
+        return $check;
+    }
+
+    /* Fonction qui s'assure qu'un appel de page PHP est bien effectué depuis le nom de domaine référencé */
+    static public function domainCheck(): bool
+    {
+        global $domain;
+        $check=false;
+        $referer = substr($_SERVER['HTTP_REFERER'],0,strlen($domain));
+        if( $referer == $domain ) {
+            $check = true;
+        }
+        return $check;
+    }
+}

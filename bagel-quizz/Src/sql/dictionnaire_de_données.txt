@@ -1,0 +1,6 @@
+Question : Numero_de_la_Question*, libelle_quest
+Reponse : Numero_de_la_Reponse* , libelle_rep
+Users : Pseudo*, Password
+Scores : Time*,score
+
+*Identifiant fonctionnel 
