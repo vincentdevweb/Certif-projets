@@ -1,19 +1,27 @@
-//Update button update or delete JOUEUR
-let view_joueurs_button = d.querySelectorAll('#view_joueurs button');
-let view_joueurs_delete_button = d.querySelectorAll('#view_joueurs_delete button');
+// Select all buttons for viewing and deleting players
+let view_joueurs_buttons = d.querySelectorAll('#view_joueurs button');
+let view_joueurs_delete_buttons = d.querySelectorAll('#view_joueurs_delete button');
 
-view_joueurs_button.forEach(view_joueur_button => {
-    view_joueur_button.addEventListener('click', e => {
+// Add event listener to each view player button
+view_joueurs_buttons.forEach(view_joueur_button => {
+    view_joueur_button.addEventListener('click', event => {
+
+        // Hide the view players section and show the update player section
         d.querySelector('#view_joueurs').classList.add('d-none');
         d.querySelector('#update_select').classList.remove('d-none');
+
+        // Set the update player ID and name from the clicked button
         d.querySelector('#update_joueur_id').value = view_joueur_button.value;
         d.querySelector('#update_joueur').value = view_joueur_button.innerHTML;
-        d.querySelector('#update_role_option').innerHTML = 'Actuellement : ' + view_joueur_button.dataset.role;
+        d.querySelector('#update_role_option').innerHTML = 'Currently: ' + view_joueur_button.dataset.role;
     });
+
 });
 
-view_joueurs_delete_button.forEach(view_joueur_delete_button => {
-    view_joueur_delete_button.addEventListener('click', e => {
+// Add event listener to each delete player button
+view_joueurs_delete_buttons.forEach(view_joueur_delete_button => {
+    view_joueur_delete_button.addEventListener('click', event => {
+        // Send a POST request with delete player data to the server
         fetch('/', {
             method: 'POST',
             headers: {
@@ -22,10 +30,14 @@ view_joueurs_delete_button.forEach(view_joueur_delete_button => {
             body: JSON.stringify({
                 delete_joueur: view_joueur_delete_button.value
             })
-        }).then((reponse_ajax) => {//promise
-            return reponse_ajax.json();
-        }).then(data => {
-            view_joueur_delete_button.classList.add('d-none');
-        });
+        })
+            .then(response => {
+                // Return the response as JSON data
+                return response.json();
+            })
+            .then(data => {
+                // Hide the delete player button after the request is processed
+                view_joueur_delete_button.classList.add('d-none');
+            });
     });
 });

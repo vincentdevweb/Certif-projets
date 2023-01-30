@@ -65,10 +65,10 @@ require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
     </form>
     <!-- JavaScript Bundle Bootsrap V5.2.1  -->
     <script src="Js/bootstrap.bundle.min.js"></script>
-    <!-- JavaScript Pour le menu  -->
-    <script src="Js/admin_menu.js"></script>
-    <!-- JavaScript specifique au planning -->
-    <script src="Js/admin_planning.js"></script>
+    <!-- JavaScript Pour le menu minifier -->
+    <script src="Js/admin_menu.min.js"></script>
+    <!-- JavaScript specifique au planning minifier -->
+    <script src="Js/admin_planning.min.js"></script>
 </body>
 
 </html>

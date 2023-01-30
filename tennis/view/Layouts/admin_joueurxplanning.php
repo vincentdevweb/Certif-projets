@@ -45,10 +45,10 @@ require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
     </form>
     <!-- JavaScript Bundle Bootsrap V5.2.1  -->
     <script src="Js/bootstrap.bundle.min.js"></script>
-    <!-- JavaScript Pour le menu  -->
-    <script src="Js/admin_menu.js"></script>
-    <!-- JavaScript specifique au PxJ  -->
-    <script src="Js/admin_pxj.js"></script>
+    <!-- JavaScript Pour le menu minifier -->
+    <script src="Js/admin_menu.min.js"></script>
+    <!-- JavaScript specifique au PxJ minifier -->
+    <script src="Js/admin_pxj.min.js"></script>
 </body>
 
 </html>

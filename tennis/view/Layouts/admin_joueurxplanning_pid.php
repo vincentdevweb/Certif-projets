@@ -17,8 +17,8 @@ require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
     </form>
     <!-- JavaScript Bundle Bootsrap V5.2.1  -->
     <script src="Js/bootstrap.bundle.min.js"></script>
-    <!-- JavaScript specifique au PxJ  -->
-    <script src="Js/admin_pxj_del.js"></script>
+    <!-- JavaScript specifique au PxJ minifier -->
+    <script src="Js/admin_pxj_del.min.js"></script>
 </body>
 
 </html>

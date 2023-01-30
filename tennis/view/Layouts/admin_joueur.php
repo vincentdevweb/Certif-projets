@@ -64,10 +64,10 @@ require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
     </form>
     <!-- JavaScript Bundle Bootsrap V5.2.1  -->
     <script src="Js/bootstrap.bundle.min.js"></script>
-    <!-- JavaScript Pour le menu  -->
-    <script src="Js/admin_menu.js"></script>
+    <!-- JavaScript Pour le menu minifier -->
+    <script src="Js/admin_menu.min.js"></script>
     <!-- JavaScript Pour le menu specifique au joueur  -->
-    <script src="Js/admin_joueur.js"></script>
+    <script src="Js/admin_joueur.min.js"></script>
 </body>
 
 

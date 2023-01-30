@@ -1,24 +1,24 @@
-//Simplification pour l'écriture
+//Shortening the code for readability
 let d = document;
 
-//On récupère des valeurs et on met une solution pour faire disparaitre le menu du depart
+//Get values and hide the initial menu
 let menu = d.querySelector('#menu');
 let menu_values = menu.querySelectorAll('button');
 
-//On veut faire apparaitre les autres menus
+//Show the other menus
 let menu_insert = d.querySelector('#insert');
 let menu_update = d.querySelector('#update');
 let menu_delete = d.querySelector('#delete');
 
 menu_values.forEach(menu_value => {
     menu_value.addEventListener('click', (e) => {
-        menu.classList.add('d-none'); // On fait disparaitre le menu de départ
+        menu.classList.add('d-none'); // Hide the initial menu
         if (menu_value.value == 1) {
-            menu_insert.classList.remove('d-none');// On fait asparaitre le menu insert
+            menu_insert.classList.remove('d-none'); // Show insert menu
         } else if (menu_value.value == 2) {
-            menu_update.classList.remove('d-none');// On fait asparaitre le menu update
+            menu_update.classList.remove('d-none'); // Show update menu
         } else {
-            menu_delete.classList.remove('d-none');// On fait asparaitre le menu delete
+            menu_delete.classList.remove('d-none'); // Show delete menu
         }
     });
 });
