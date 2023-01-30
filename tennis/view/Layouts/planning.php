@@ -1,7 +1,12 @@
-<?php require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
+<?php
+// Include head partial
+require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
 
 <body>
-    <?php require_once(__DIR__ . '/../../view/Partials/header.php'); ?>
+    <?php
+    // Include header partial
+    require_once(__DIR__ . '/../../view/Partials/header.php');
+    ?>
     <div class="card text-center mx-auto rounded-1 mt-cust1 rounded-0 bg-gradient bg-info">
         <h5 class="card-header">PLANNING</h5>
     </div>
@@ -13,6 +18,7 @@
         </div>
     </div>
 
+    <!-- Include footer partial file -->
     <?php require_once(__DIR__ . '/../../view/Partials/footer.php'); ?>
     <!-- JavaScript Bundle Bootsrap V5.2.1  -->
     <script src="Js/bootstrap.bundle.min.js"></script>

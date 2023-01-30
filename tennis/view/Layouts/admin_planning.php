@@ -1,7 +1,11 @@
-<?php require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
+<?php
+// Include head partial
+require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
 
 <body>
-    <?php require_once(__DIR__ . '/../../view/Partials/header_admin.php'); ?>
+    <?php
+    // Include header admin partial
+    require_once(__DIR__ . '/../../view/Partials/header_admin.php'); ?>
     <form method="post" action="/">
         <!-- MENU -->
         <div class="card text-center col-md-11 mx-auto mt-4" id='menu'>
@@ -21,7 +25,6 @@
             </div>
             <div class="card-body d-grid gap-2 mx-auto">
                 <select name="insert_terrain_id" class="text-center" data-live-search="true">
-                    <!-- LA UN PHP VENANT DE planning.php -->
                     <?= $plannings_view_insert ?>
                 </select>
             </div>
@@ -30,11 +33,9 @@
         <!-- FORMULAIRE TO DELETE -->
         <div class="card text-center col-md-11 mx-auto mt-4 d-none" id='delete'>
             <h5 class="card-header">Supprimer un Adhérent/Professeur</h5>
-            <!-- <div class="card-body d-grid gap-2 col-5 mx-auto"> -->
             <div id="view_plannings_delete">
                 <?= $plannings_view_delete ?>
             </div>
-            <!-- </div> -->
         </div>
     </form>
     <form method="post" action="/">

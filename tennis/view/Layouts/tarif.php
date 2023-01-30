@@ -1,17 +1,15 @@
-<?php require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
+<?php
+// Include head partial
+require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
 
 <body>
-    <?php require_once(__DIR__ . '/../../view/Partials/header.php'); ?>
+    <?php
+    // Include header partial
+    require_once(__DIR__ . '/../../view/Partials/header.php');
+    ?>
     <div class="mt-cust1">
         <div class="card-group">
-            <!-- <div class="card">
-                <img src="..." class="card-img-top" alt="...">
-                <div class="card-body">
-                    <h5 class="card-title fw-bolder">Mini Tennis(Jusqu’à 6 ans)</h5>
-                    <p class="card-text fst-italic fw-semibold">245 € : 1 h/ semaine</p>
-                    <p class="card-text">(220 € + 25 € licence)</p>
-                </div>
-            </div> -->
+            <!-- First card -->
             <div class="card">
                 <img src="./Imgs/enfant.webp" class="card-img-top rounded" alt="enfant chat">
                 <div class="card-body">
@@ -20,6 +18,7 @@
                     <p class="card-text">(240 € + 25 € licence)</p>
                 </div>
             </div>
+            <!-- Second card -->
             <div class="card">
                 <img src="./Imgs/ado.webp" class="card-img-top rounded" alt="ado chat">
                 <div class="card-body">
@@ -30,6 +29,7 @@
                     <p class="card-text">(470 € + 25 € licence)</p>
                 </div>
             </div>
+            <!-- Third card -->
             <div class="card">
                 <img src="./Imgs/etudiant.webp" class="card-img-top rounded" alt="etudiant chat">
                 <div class="card-body">
@@ -41,6 +41,7 @@
                     <p class="card-text"><small class="text-muted">* année sportive en cours</small></p>
                 </div>
             </div>
+            <!-- Fourth card -->
             <div class="card">
                 <img src="./Imgs/adulte.webp" class="card-img-top rounded" alt="adulte chat">
                 <div class="card-body">
@@ -54,6 +55,7 @@
 
         </div>
     </div>
+    <!-- Include footer partial file -->
     <?php require_once(__DIR__ . '/../../view/Partials/footer.php'); ?>
     <!-- JavaScript Bundle Bootsrap V5.2.1  -->
     <script src="Js/bootstrap.bundle.min.js"></script>

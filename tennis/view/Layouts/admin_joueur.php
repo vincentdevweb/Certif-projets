@@ -1,7 +1,11 @@
-<?php require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
+<?php
+// Include head partial
+require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
 
 <body>
-    <?php require_once(__DIR__ . '/../../view/Partials/header_admin.php'); ?>
+    <?php
+    // Include header admin partial
+    require_once(__DIR__ . '/../../view/Partials/header_admin.php'); ?>
     <form method="post" action="/">
         <!-- MENU -->
         <div class="card text-center col-md-11 mx-auto mt-4" id='menu'>
@@ -53,11 +57,9 @@
         <!-- FORMULAIRE TO DELETE -->
         <div class="card text-center col-md-11 mx-auto mt-4 d-none" id='delete'>
             <h5 class="card-header">Supprimer un Adhérent/Professeur</h5>
-            <!-- <div class="card-body d-grid gap-2 col-5 mx-auto"> -->
             <div id="view_joueurs_delete">
                 <?= $joueurs_view_delete ?>
             </div>
-            <!-- </div> -->
         </div>
     </form>
     <!-- JavaScript Bundle Bootsrap V5.2.1  -->

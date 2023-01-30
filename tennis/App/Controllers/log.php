@@ -1,13 +1,16 @@
 <?php
+
+// Check if the form data has been submitted
 if (isset($_POST['log'])) {
-    // Protection contre les injections SQL --> enlève des caractères spéciaux 
+    // Protection against SQL injections by removing special characters
     $string_safe = htmlspecialchars($_POST['log']);
 
-    //récuperation du password dans la BDD en utilisant le pseudo 
-    $hashed_password = $usedb->recup_pass($string_safe);
+    // Retrieve the password from the database using the username
+    $hashed_password = $usedb->getUserPassword($string_safe);
 
+    // Verify if the password is the same as the one in the database
     if (password_verify($_POST['log-pass'], $hashed_password)) {
-        //remplis une fois uniquement la session si le password est identique à celle dans la BDD 
+        // Fill the session only once if the password is the same as the one in the database
         $_SESSION['login'] = Outils::genererSTRAleatoire();
         header("Location: /");
         exit;

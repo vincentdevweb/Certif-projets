@@ -1,7 +1,12 @@
-<?php require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
+<?php
+// Include head partial
+require_once(__DIR__ . '/../../view/Partials/head.php'); ?>
 
 <body>
-    <?php require_once(__DIR__ . '/../../view/Partials/header.php'); ?>
+    <?php
+    // Include header partial
+    require_once(__DIR__ . '/../../view/Partials/header.php');
+    ?>
     <div class="mt-cust1 text-center">
         <div class="container-fluid">
 
@@ -44,7 +49,8 @@
                 </div>
             </div>
         </div>
-        <?php require_once(__DIR__ . '/../../view/Partials/footer.php'); ?>
+    <!-- Include footer partial file -->
+    <?php require_once(__DIR__ . '/../../view/Partials/footer.php'); ?>
         <!-- JavaScript Bundle Bootsrap V5.2.1  -->
         <script src="Js/bootstrap.bundle.min.js"></script>
 </body>
