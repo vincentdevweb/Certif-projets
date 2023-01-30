@@ -6,7 +6,7 @@
             <!-- Section: CTA -->
             <section class="">
                 <p class="d-flex justify-content-center align-items-center">
-                    <span class="me-3">Effet Sonnore : </span>
+                    <span class="me-3">Effet Sonore : </span>
                     <button id="game_sound" type="button" class="btn btn-outline-light btn-rounded">
                         ON!
                     </button>
